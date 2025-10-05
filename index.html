@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Quinfall Interaktive Karte</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map', {
+      crs: L.CRS.Simple,
+      minZoom: -2,
+      maxZoom: 2,
+      zoomSnap: 0.1,
+    });
+
+    const w = 23040; // Breite deiner Karte in Pixeln
+    const h = 15039; // Höhe deiner Karte in Pixeln
+
+    const bounds = [[0, 0], [h, w]];
+    L.imageOverlay('map.jpg', bounds).addTo(map);
+    map.fitBounds(bounds);
+
+    // Beispiel-Marker
+    L.marker([12000, 11500]).addTo(map).bindPopup("Hier bist du!").openPopup();
+  </script>
+</body>
+</html>
