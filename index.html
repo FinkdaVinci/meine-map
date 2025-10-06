@@ -17,23 +17,52 @@
   <div id="map"></div>
   
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    const map = L.map('map', {
-      crs: L.CRS.Simple,
-      minZoom: -2,
-      maxZoom: 2,
-      zoomSnap: 0.1,
-    });
+ <script>
+  const map = L.map('map', {
+    crs: L.CRS.Simple,
+    minZoom: -2,
+    maxZoom: 2,
+    zoomSnap: 0.1,
+  });
 
-    const w = 23040; // Breite deiner Karte in Pixeln
-    const h = 15039; // Höhe deiner Karte in Pixeln
+  const w = 23040;
+  const h = 15039;
+  const bounds = [[0, 0], [h, w]];
+  L.imageOverlay('map.jpg', bounds).addTo(map);
+  map.fitBounds(bounds);
 
-    const bounds = [[0, 0], [h, w]];
-    L.imageOverlay('map.jpg', bounds).addTo(map);
-    map.fitBounds(bounds);
+  // === Ebenen ===
 
-    // Beispiel-Marker
-    L.marker([12000, 11500]).addTo(map).bindPopup("Hier bist du!").openPopup();
-  </script>
+  // Städte
+  const cities = L.layerGroup([
+    L.marker([8000, 12000]).bindPopup('Stadt A'),
+    L.marker([9000, 10000]).bindPopup('Stadt B')
+  ]);
+
+  // Ressourcen
+  const resources = L.layerGroup([
+    L.marker([6000, 11000]).bindPopup('Eisenerz'),
+    L.marker([7000, 9500]).bindPopup('Goldmine')
+  ]);
+
+  // Dungeons
+  const dungeons = L.layerGroup([
+    L.marker([10000, 9000]).bindPopup('Dungeon Alpha'),
+    L.marker([11000, 9500]).bindPopup('Dungeon Beta')
+  ]);
+
+  // Layer-Control
+  const overlayMaps = {
+    "Städte": cities,
+    "Ressourcen": resources,
+    "Dungeons": dungeons
+  };
+
+  L.control.layers(null, overlayMaps).addTo(map);
+
+  // Optionale Standard-Anzeige
+  cities.addTo(map); // Zeigt Städte beim Start
+</script>
+
 </body>
 </html>
