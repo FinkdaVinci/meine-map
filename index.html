@@ -31,15 +31,43 @@
     L.imageOverlay('map.jpg', bounds).addTo(map);
     map.fitBounds(bounds);
 
-    // ======================
-    // === LAYER GROUPS ===
-    // ======================
-
+    // === Städte ===
     const staedte = L.layerGroup([
-      L.marker([8000, 12000]).bindPopup('Stadt A'),
-      L.marker([9000, 10000]).bindPopup('Stadt B'),
-    ]);
+  L.marker([3075, 11336]).bindPopup("Edgeshore Hafen")
+  L.marker([4000, 10578]).bindPopup("Silvercrest Hafen")
+  L.marker([4268, 11242]).bindPopup("Meadow")
+  L.marker([4419, 12026]).bindPopup("Maplewood Hafen")
+  L.marker([5082, 11298]).bindPopup("Westnest")
+  L.marker([5667, 10440]).bindPopup("Rune Mound")
+  L.marker([6413, 11081]).bindPopup("Gallanline")
+  L.marker([7103, 10620]).bindPopup("Shadow Atoll")
+  L.marker([6640, 9782]).bindPopup("Rivers End")
+  L.marker([8202, 9539]).bindPopup("Shimmering")
+  L.marker([8238, 8395]).bindPopup("Kineallen")
+  L.marker([7287, 7184]).bindPopup("Breezy Meadows")
+  L.marker([9780, 7814]).bindPopup("Mreafall")
+  L.marker([10767, 8671]).bindPopup("Vanguard")
+  L.marker([11678, 7151]).bindPopup("Calmarnock")
+  L.marker([10401, 6482]).bindPopup("Silvershade")
+  L.marker([12588, 5788]).bindPopup("Rockyroad")
+  L.marker([14190, 7159]).bindPopup("Astrachan")
+  L.marker([12834, 8700]).bindPopup("Borderkeep")
+  L.marker([14784, 8610]).bindPopup("Amberthorn")
+  L.marker([15953, 7366]).bindPopup("Lakeside Watch")
+  L.marker([16604, 8630]).bindPopup("Larcbost")
+  L.marker([17952, 8537]).bindPopup("Harvest Plains")
+  L.marker([17909, 9457]).bindPopup("Nearon")
+  L.marker([15246, 10935]).bindPopup("Roamtribe")
+  L.marker([14387, 10398]).bindPopup("Pabas")
+  L.marker([13546, 9730]).bindPopup("Desolate Hands")
+  L.marker([12155, 10298]).bindPopup("Horus")
+  L.marker([11384, 9888]).bindPopup("Safesands")
+  L.marker([12971, 10520]).bindPopup("Oasis Mirage")
+  L.marker([13447, 11840]).bindPopup("Sandswept")
+  L.marker([12773, 13052]).bindPopup("Qeerva Hafen")
+]);
 
+    // === Weitere Layer ===
     const erze = L.layerGroup([
       L.marker([6000, 11000]).bindPopup('Eisenerz'),
       L.marker([6200, 9800]).bindPopup('Silber'),
@@ -65,10 +93,7 @@
       L.marker([9600, 9800]).bindPopup('Untote'),
     ]);
 
-    // ========================
-    // === Layer-Control UI ===
-    // ========================
-
+    // === Layer-Control ===
     const overlayMaps = {
       "Städte": staedte,
       "Erze": erze,
@@ -80,7 +105,7 @@
 
     L.control.layers(null, overlayMaps).addTo(map);
 
-    // === Optional: Standard aktivierte Layer ===
+    // Standard aktivierte Layer
     staedte.addTo(map);
   </script>
 </body>
