@@ -15,54 +15,73 @@
 </head>
 <body>
   <div id="map"></div>
-  
+
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
- <script>
-  const map = L.map('map', {
-    crs: L.CRS.Simple,
-    minZoom: -2,
-    maxZoom: 2,
-    zoomSnap: 0.1,
-  });
+  <script>
+    const map = L.map('map', {
+      crs: L.CRS.Simple,
+      minZoom: -2,
+      maxZoom: 2,
+      zoomSnap: 0.1,
+    });
 
-  const w = 23040;
-  const h = 15039;
-  const bounds = [[0, 0], [h, w]];
-  L.imageOverlay('map.jpg', bounds).addTo(map);
-  map.fitBounds(bounds);
+    const w = 23040;
+    const h = 15039;
+    const bounds = [[0, 0], [h, w]];
+    L.imageOverlay('map.jpg', bounds).addTo(map);
+    map.fitBounds(bounds);
 
-  // === Ebenen ===
+    // ======================
+    // === LAYER GROUPS ===
+    // ======================
 
-  // Städte
-  const cities = L.layerGroup([
-    L.marker([8000, 12000]).bindPopup('Stadt A'),
-    L.marker([9000, 10000]).bindPopup('Stadt B')
-  ]);
+    const staedte = L.layerGroup([
+      L.marker([8000, 12000]).bindPopup('Stadt A'),
+      L.marker([9000, 10000]).bindPopup('Stadt B'),
+    ]);
 
-  // Ressourcen
-  const resources = L.layerGroup([
-    L.marker([6000, 11000]).bindPopup('Eisenerz'),
-    L.marker([7000, 9500]).bindPopup('Goldmine')
-  ]);
+    const erze = L.layerGroup([
+      L.marker([6000, 11000]).bindPopup('Eisenerz'),
+      L.marker([6200, 9800]).bindPopup('Silber'),
+    ]);
 
-  // Dungeons
-  const dungeons = L.layerGroup([
-    L.marker([10000, 9000]).bindPopup('Dungeon Alpha'),
-    L.marker([11000, 9500]).bindPopup('Dungeon Beta')
-  ]);
+    const pflanzen = L.layerGroup([
+      L.marker([7000, 10500]).bindPopup('Heilpflanze'),
+      L.marker([6800, 9500]).bindPopup('Giftpflanze'),
+    ]);
 
-  // Layer-Control
-  const overlayMaps = {
-    "Städte": cities,
-    "Ressourcen": resources,
-    "Dungeons": dungeons
-  };
+    const tierspawns = L.layerGroup([
+      L.marker([10000, 8000]).bindPopup('Reh-Spawn'),
+      L.marker([10200, 8200]).bindPopup('Wolf-Spawn'),
+    ]);
 
-  L.control.layers(null, overlayMaps).addTo(map);
+    const rifts = L.layerGroup([
+      L.marker([11000, 9000]).bindPopup('Rift Alpha'),
+      L.marker([10800, 8800]).bindPopup('Rift Beta'),
+    ]);
 
-  // Optionale Standard-Anzeige
-  cities.addTo(map); // Zeigt Städte beim Start
-</script>
+    const mobspawns = L.layerGroup([
+      L.marker([9500, 9700]).bindPopup('Goblinlager'),
+      L.marker([9600, 9800]).bindPopup('Untote'),
+    ]);
 
+    // ========================
+    // === Layer-Control UI ===
+    // ========================
+
+    const overlayMaps = {
+      "Städte": staedte,
+      "Erze": erze,
+      "Pflanzen": pflanzen,
+      "Tier-Spawns": tierspawns,
+      "Rifts": rifts,
+      "Mob-Spawns": mobspawns
+    };
+
+    L.control.layers(null, overlayMaps).addTo(map);
+
+    // === Optional: Standard aktivierte Layer ===
+    staedte.addTo(map);
+  </script>
 </body>
 </html>
